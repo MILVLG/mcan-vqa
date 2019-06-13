@@ -227,10 +227,10 @@ If this repository is helpful for your research, we'd really appreciate it if yo
 
 ```
 @inProceedings{yu2019mcan,
-author = {Yu, Zhou and Yu, Jun and Cui, Yuhao and Tao, Dacheng and Tian, Qi},
-title = {Deep Modular Co-Attention Networks for Visual Question Answering},
-booktitle = {Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},
-pages = {6281--6290},
-year = {2019}
+  author = {Yu, Zhou and Yu, Jun and Cui, Yuhao and Tao, Dacheng and Tian, Qi},
+  title = {Deep Modular Co-Attention Networks for Visual Question Answering},
+  booktitle = {Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},
+  pages = {6281--6290},
+  year = {2019}
 }
 ```
