@@ -127,7 +127,7 @@ To add：
 
 3. ```--NW=int```, e.g.```--NW=8``` if you want to accelerate I/O speed.
 
-4. ```--MODEL={'small', 'large'}```  ( Warning: The large model will consume more GPU memory, maybe [Multi-GPU and Gradient Accumulate](#Multi-GPU-and-Gradient-Accumulate) can help if you want to train the model with limited GPU memory.)
+4. ```--MODEL={'small', 'large'}```  ( Warning: The large model will consume more GPU memory, maybe [Multi-GPU Training and Gradient Accumulate](#Multi-GPU-Training-and-Gradient-Accumulate) can help if you want to train the model with limited GPU memory.)
 
 5. ```--SPLIT={'train', 'train+val', 'train+val+vg'}``` can combine the training datasets as you want. The default training split is ```'train+val+vg'```.  Setting ```--SPLIT='train'```  will trigger the evaluation script to run the validation score after every epoch automatically.
 
