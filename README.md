@@ -1,7 +1,7 @@
-# Deep Modular Co-Attention Networks for Visual Question Answering (MCAN)
+# Deep Modular Co-Attention Networks (MCAN)
 
 
-This repository corresponds to the **PyTorch** implementation of the MCAN for VQA. Single MCAN model  delivers **70.70%** (small model)  and **70.93%** (big model) overall accuracy on the *test-dev* split of *VQA-v2* dataset, respectively.  Please check our [paper](http://openaccess.thecvf.com/content_CVPR_2019/html/Yu_Deep_Modular_Co-Attention_Networks_for_Visual_Question_Answering_CVPR_2019_paper.html) for more details.
+This repository corresponds to the **PyTorch** implementation of the MCAN for VQA. Single MCAN model  delivers **70.70%** (small model)  and **70.93%** (large model) overall accuracy on the *test-dev* split of *VQA-v2* dataset, respectively.  Please check our [paper](http://openaccess.thecvf.com/content_CVPR_2019/html/Yu_Deep_Modular_Co-Attention_Networks_for_Visual_Question_Answering_CVPR_2019_paper.html) for more details.
 
 ![Overview of MCAN](misc/mcan_overall.png)
 
@@ -39,7 +39,7 @@ You should first install some necessary packages.
 
 #### Setup 
 
- The image features are extracted using the [bottom-up-attention](https://github.com/peteanderson80/bottom-up-attention) strategy, with each image being represented as an dynamic number (from 10 to 100) of 2048-D features. We store the features for each image in a `.npz` file. You can download the extracted features from [here](https://awma1-my.sharepoint.com/:f:/g/personal/yuz_l0_tn/EsfBlbmK1QZFhCOFpr4c5HUBzUV0aH2h1McnPG1jWAxytQ?e=2BZl8O). The download files contains three files: **train2014.tar.gz, val2014.tar.gz, test2015.tar.gz**, corresponding to the train, val, and test images for *VQA-v2*, respectively. You should place them as follows:
+ The image features are extracted using the [bottom-up-attention](https://github.com/peteanderson80/bottom-up-attention) strategy, with each image being represented as an dynamic number (from 10 to 100) of 2048-D features. We store the features for each image in a `.npz` file. You can prepare the visual features by yourself or download the extracted features from [here](https://awma1-my.sharepoint.com/:f:/g/personal/yuz_l0_tn/EsfBlbmK1QZFhCOFpr4c5HUBzUV0aH2h1McnPG1jWAxytQ?e=2BZl8O). The download files contains three files: **train2014.tar.gz, val2014.tar.gz, test2015.tar.gz**, corresponding to the train, val, and test images for *VQA-v2*, respectively. You should place them as follows:
 
 ```angular2html
 |-- datasets
@@ -51,7 +51,7 @@ You should first install some necessary packages.
 
 Besides, we use the VQA samples from the [visual genome dataset](http://visualgenome.org/) to expand the training samples. Similar to existing strategies, we preprocessed the samples by two rules:
 
-1. Select the QA pairs with the corresponding images appear in the MSCOCO train and val splits.
+1. Select the QA pairs with the corresponding images appear in the MSCOCO train and *val* splits.
 2. Select the QA pairs with the answer appear in the processed answer list (occurs more than 8 times in whole *VQA-v2* answers).
 
 For convenience, we provide our processed vg questions and annotations files, you can download from [here](https://awma1-my.sharepoint.com/:f:/g/personal/yuz_l0_tn/EmVHVeGdck1IifPczGmXoaMBFiSvsegA6tf_PqxL3HXclw), and place them as follow:
@@ -164,7 +164,7 @@ We recommend you to use the GPU with at least 8 GB memory, but if you haven't su
 
 #### Offline Evaluation
 
-Offline evaluation only support the VQA 2.0-val split. If you want to evaluate on the VQA 2.0-test-dev or VQA 2.0-test-std split, please see [Online Evaluation](#Online-Evaluation).
+Offline evaluation only support the VQA 2.0 *val* split. If you want to evaluate on the VQA 2.0 *test-dev* or *test-std* split, please see [Online Evaluation](#Online-Evaluation).
 
 There are two ways to start:
 
@@ -183,30 +183,28 @@ $ python3 run.py --RUN='val' --CKPT_PATH=str
 
 #### Online Evaluation
 
-VQA 2.0-test-dev and VQA 2.0-test-std splits are combined in VQA 2.0-test split.
-
-Run as follows:
+The evaluations of both the VQA 2.0 *test-dev* and *test-std* splits are run as follows:
 
 ```bash
 $ python3 run.py --RUN='test' --CKPT_V=str --CKPT_E=int
 ```
-Use absolutely path is also supported.
+Alternatively, the checkpoint file can be loaded by its absolute path `--CKPT_PATH`, which has the same function as the args `--CKPT_V` and `--CKPT_E`.
 
 Result files are stored in ```results/result_test/result_run_<'PATH+random number' or 'VERSION+EPOCH'>.json```
 
-You can upload the result files to [Eval AI](https://evalai.cloudcv.org/web/challenges/challenge-page/163/overview) to obtain the test scores.
+You can upload the obtained result json files to [Eval AI](https://evalai.cloudcv.org/web/challenges/challenge-page/163/overview) to evaluate the scores on *test-dev* and *test-std* splits.
 
 
 ## Pretrained models
 
-We provide two pretrained models, namely the `small model` and the `large model`. The provided small model corrresponds to the one in our paper with slightly higher performance (the overall accuracy on the test-dev split is 70.63% in our paper) due to different pytorch versions. The large model uses a 2x larger `HIDDEN_SIZE=1024` compared to the small model with `HIDDEN_SIZE=512`. 
+We provide two pretrained models, namely the `small` model and the `large` model. The provided small model corrresponds to the one in our paper with slightly higher performance (the overall accuracy on the *test-dev* split is 70.63% in our paper) due to different pytorch versions. The large model uses a 2x larger `HIDDEN_SIZE=1024` compared to the small model with `HIDDEN_SIZE=512`. 
 
-The performance of the two models on test-dev split is reported as follows:
+The performance of the two models on *test-dev* split is reported as follows:
 
 _Model_ | Overall | Yes/No | Number | Other
 :-: | :-: | :-: | :-: | :-:
-_Small model_ | 70.7 | 86.91 | **53.42** | 60.75| 
-_Large model_ | **70.93**| **87.39** | 52.78 | **60.98**|
+_Small_ | 70.7 | 86.91 | **53.42** | 60.75| 
+_Large_ | **70.93**| **87.39** | 52.78 | **60.98**|
 
 
 These two models can be download [here](https://awma1-my.sharepoint.com/:f:/g/personal/yuz_l0_tn/EtNU5OG1dNhMq8M1pgeuQZwBgcj2RQCVnzLGDeDfnejPMQ?e=ynYhvk), and you should unzip and put them to the correct folders as follows:
@@ -231,7 +229,7 @@ If this repository is helpful for your research, we'd really appreciate it if yo
 @inProceedings{yu2019mcan,
 author = {Yu, Zhou and Yu, Jun and Cui, Yuhao and Tao, Dacheng and Tian, Qi},
 title = {Deep Modular Co-Attention Networks for Visual Question Answering},
-booktitle = {The IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},
+booktitle = {Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},
 pages = {6281--6290},
 year = {2019}
 }
