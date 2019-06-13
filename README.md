@@ -1,7 +1,7 @@
 # Deep Modular Co-Attention Networks (MCAN)
 
 
-This repository corresponds to the **PyTorch** implementation of the MCAN for VQA. Single MCAN model  delivers **70.70%** (small model)  and **70.93%** (large model) overall accuracy on the *test-dev* split of *VQA-v2* dataset, respectively.  Please check our [paper](http://openaccess.thecvf.com/content_CVPR_2019/html/Yu_Deep_Modular_Co-Attention_Networks_for_Visual_Question_Answering_CVPR_2019_paper.html) for more details.
+This repository corresponds to the **PyTorch** implementation of the MCAN for VQA. A single MCAN model delivers **70.70%** (small model) and **70.93%** (large model) overall accuracy on the *test-dev* split of *VQA-v2* dataset, respectively.  Please check our [paper](http://openaccess.thecvf.com/content_CVPR_2019/html/Yu_Deep_Modular_Co-Attention_Networks_for_Visual_Question_Answering_CVPR_2019_paper.html) for more details.
 
 ![Overview of MCAN](misc/mcan_overall.png)
 
@@ -19,7 +19,7 @@ This repository corresponds to the **PyTorch** implementation of the MCAN for VQ
 
 #### Software and Hardware Requirements
 
-You may need a machine with at least **1 GPU (>= 8GB)**, **20GB memory** and **50GB free space** of hard disk.  We strongly recommend to use a SSD drive to guarantee high-speed I/O.
+You may need a machine with at least **1 GPU (>= 8GB)**, **20GB memory** and **50GB free disk space**.  We strongly recommend to use a SSD drive to guarantee high-speed I/O.
 
 You should first install some necessary packages.
 
@@ -104,10 +104,12 @@ Finally, the `datasets` folders will have the following structure:
 
 ## Training
 
+The following script will start training with the default hyperparameters:
+
 ```bash
 $ python3 run.py --RUN='train'
 ```
-to easily start training with default parameters. All checkpoint files will be saved to:
+All checkpoint files will be saved to:
 
 ```
 ckpts/ckpt_<VERSION>/epoch<EPOCH_NUMBER>.pkl
@@ -138,23 +140,23 @@ To add：
 
 ####  Multi-GPU Training and Gradient Accumulate
 
-We recommend you to use the GPU with at least 8 GB memory, but if you haven't such device, don't worry, we provide two ways to deal with it:
+We recommend to use the GPU with at least 8 GB memory, but if you don't have such device, don't worry, we provide two ways to deal with it:
 
 1. _Multi-GPU Training_: 
 
-  If you want to accelerate training or train the model on a device with limited GPU memory, you can use more than one GPUs:
+    If you want to accelerate training or train the model on a device with limited GPU memory, you can use more than one GPUs:
 
-  Add ```--GPU='0, 1, 2, 3...'```
+	Add ```--GPU='0, 1, 2, 3...'```
 
-  The batch size on each GPU will be adjusted to `BATCH_SIZE`/#GPUs automatically.
+    The batch size on each GPU will be adjusted to `BATCH_SIZE`/#GPUs automatically.
 
 2. _Gradient Accumulatation_: 
 
-	If you only have one GPU less than 8GB, an alternative strategy is provided to use the gradient accumulatation during training:
+    If you only have one GPU less than 8GB, an alternative strategy is provided to use the gradient accumulatation during training:
 	
 	Add ```--ACCU=n```  
 	
-	This makes the optimizer accumulate gradients for`n` small batches and update the model weights at once. It is worth noting that  `BATCH_SIZE` must be divided by ```n``` to run this mode correctly. 
+    This makes the optimizer accumulate gradients for`n` small batches and update the model weights at once. It is worth noting that  `BATCH_SIZE` must be divided by ```n``` to run this mode correctly. 
 
 
 ## Validation and Testing
@@ -174,7 +176,7 @@ There are two ways to start:
 $ python3 run.py --RUN='val' --CKPT_V=str --CKPT_E=int
 ```
 
-or use absolutely path:
+or use the absolute path instead:
 
 ```bash
 $ python3 run.py --RUN='val' --CKPT_PATH=str
@@ -188,16 +190,15 @@ The evaluations of both the VQA 2.0 *test-dev* and *test-std* splits are run as 
 ```bash
 $ python3 run.py --RUN='test' --CKPT_V=str --CKPT_E=int
 ```
-Alternatively, the checkpoint file can be loaded by its absolute path `--CKPT_PATH`, which has the same function as the args `--CKPT_V` and `--CKPT_E`.
 
 Result files are stored in ```results/result_test/result_run_<'PATH+random number' or 'VERSION+EPOCH'>.json```
 
-You can upload the obtained result json files to [Eval AI](https://evalai.cloudcv.org/web/challenges/challenge-page/163/overview) to evaluate the scores on *test-dev* and *test-std* splits.
+You can upload the obtained result json file to [Eval AI](https://evalai.cloudcv.org/web/challenges/challenge-page/163/overview) to evaluate the scores on *test-dev* and *test-std* splits.
 
 
 ## Pretrained models
 
-We provide two pretrained models, namely the `small` model and the `large` model. The provided small model corrresponds to the one in our paper with slightly higher performance (the overall accuracy on the *test-dev* split is 70.63% in our paper) due to different pytorch versions. The large model uses a 2x larger `HIDDEN_SIZE=1024` compared to the small model with `HIDDEN_SIZE=512`. 
+We provide two pretrained models, namely the `small` model and the `large` model. The small model corrresponds to the one describe in our paper with slightly higher performance (the overall accuracy on the *test-dev* split is 70.63% in our paper) due to different pytorch versions. The large model uses a 2x larger `HIDDEN_SIZE=1024` compared to the small model with `HIDDEN_SIZE=512`. 
 
 The performance of the two models on *test-dev* split is reported as follows:
 
