@@ -138,7 +138,7 @@ To add：
 7. ```--MAX_EPOCH=int``` if you want stop training at a specified epoch number.
 
 
-####  Multi-GPU Training and Gradient Accumulate
+####  Multi-GPU Training and Gradient Accumulation
 
 We recommend to use the GPU with at least 8 GB memory, but if you don't have such device, don't worry, we provide two ways to deal with it:
 
@@ -150,9 +150,9 @@ We recommend to use the GPU with at least 8 GB memory, but if you don't have suc
 
     The batch size on each GPU will be adjusted to `BATCH_SIZE`/#GPUs automatically.
 
-2. _Gradient Accumulatation_: 
+2. _Gradient Accumulation_: 
 
-    If you only have one GPU less than 8GB, an alternative strategy is provided to use the gradient accumulatation during training:
+    If you only have one GPU less than 8GB, an alternative strategy is provided to use the gradient accumulation during training:
 	
 	Add ```--ACCU=n```  
 	
