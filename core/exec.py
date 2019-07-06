@@ -24,8 +24,6 @@ class Execution:
         print('Loading dataset ........')
         self.dataset = DataSet(__C)
 
-        # If trigger the evaluation after every epoch
-        # Will create a new cfgs with RUN_MODE = 'val'
         self.dataset_eval = None
         if __C.EVAL_EVERY_EPOCH:
             __C_eval = copy.deepcopy(__C)
@@ -37,7 +35,7 @@ class Execution:
 
     def train(self, dataset, dataset_eval=None):
 
-        # Obtain information from dataset
+        # Obtain needed information
         data_size = dataset.data_size
         token_size = dataset.token_size
         ans_size = dataset.ans_size
@@ -101,7 +99,7 @@ class Execution:
         named_params = list(net.named_parameters())
         grad_norm = np.zeros(len(named_params))
 
-        # Define multi-thread data loader to feed data per iteration
+        # Define multi-thread dataloader
         if self.__C.SHUFFLE_MODE in ['external']:
             dataloader = Data.DataLoader(
                 dataset,
@@ -124,7 +122,7 @@ class Execution:
         # Training script
         for epoch in range(start_epoch, self.__C.MAX_EPOCH):
 
-            # Print log information to file
+            # Save log information
             logfile = open(
                 self.__C.LOG_PATH +
                 'log_run_' + self.__C.VERSION + '.txt',
@@ -137,11 +135,11 @@ class Execution:
             )
             logfile.close()
 
-            # Decay learning rate
+            # Learning Rate Decay
             if epoch in self.__C.LR_DECAY_LIST:
                 adjust_lr(optim, self.__C.LR_DECAY_R)
 
-            # Externally shuffle data list
+            # Externally shuffle
             if self.__C.SHUFFLE_MODE == 'external':
                 shuffle_list(dataset.ans_list)
 

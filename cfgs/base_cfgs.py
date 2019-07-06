@@ -17,32 +17,30 @@ class Cfgs(PATH):
         super(Cfgs, self).__init__()
 
         # Set Devices
-        # If use multi-gpu training, you can set e.g.'0, 1, 2' instead
+        # If use multi-gpu training, set e.g.'0, 1, 2' instead
         self.GPU = '0'
 
-        # Set Seed For CPU And GPUs
+        # Set RNG For CPU And GPUs
         self.SEED = random.randint(0, 99999999)
 
         # -------------------------
         # ---- Version Control ----
         # -------------------------
 
-        # You can set a name to start new training
+        # Define a specific name to start new training
         self.VERSION = 'Anonymous_' + str(self.SEED)
 
-        # Use checkpoint to resume training
+        # Resume training
         self.RESUME = False
 
-        # Resume training version or testing version
+        # Used in Resume training and testing
         self.CKPT_VERSION = self.VERSION
-
-        # Resume training epoch or testing epoch
         self.CKPT_EPOCH = 0
 
-        # if set 'CKPT_PATH', -> 'CKPT_VERSION' and 'CKPT_EPOCH' will not work any more
+        # Absolutely checkpoint path, 'CKPT_VERSION' and 'CKPT_EPOCH' will be overridden
         self.CKPT_PATH = None
 
-        # Print loss every iteration
+        # Print loss every step
         self.VERBOSE = True
 
 
@@ -50,18 +48,16 @@ class Cfgs(PATH):
         # ---- Data Provider Params ----
         # ------------------------------
 
-        # Run as 'train' 'val' or 'test'
+        # {'train', 'val', 'test'}
         self.RUN_MODE = 'train'
 
-        # Set True to evaluate offline when an epoch finished
-        # (only work when train with 'train' split)
+        # Set True to evaluate offline
         self.EVAL_EVERY_EPOCH = True
 
-        # Set True to save the prediction vector
-        # (use in ensemble)
+        # Set True to save the prediction vector (Ensemble)
         self.TEST_SAVE_PRED = False
 
-        # Define the 'train' 'val' 'test' run split
+        # Define the 'train' 'val' 'test' data split
         # (EVAL_EVERY_EPOCH triggered when set {'train': 'train'})
         self.SPLIT = {
             'train': '',
@@ -70,10 +66,9 @@ class Cfgs(PATH):
         }
 
         # A external method to set train split
-        # will override the SPLIT['train']
         self.TRAIN_SPLIT = 'train+val+vg'
 
-        # Set True to use pretrained GloVe word embedding
+        # Set True to use pretrained word embedding
         # (GloVe: spaCy https://spacy.io/)
         self.USE_GLOVE = True
 
@@ -85,7 +80,6 @@ class Cfgs(PATH):
         self.MAX_TOKEN = 14
 
         # Filter the answer by occurrence
-        # (filter the answers which occurrence bigger than ANS_FREQ)
         self.ANS_FREQ = 8
 
         # Max length of extracted faster-rcnn 2048D features
@@ -103,7 +97,7 @@ class Cfgs(PATH):
 
         # Use pin memory
         # (Warning: pin memory can accelerate GPU loading but may
-        # increase the CPU memory usage when NUM_WORKS is big)
+        # increase the CPU memory usage when NUM_WORKS is large)
         self.PIN_MEM = True
 
         # Large model can not training with batch size 64
@@ -132,7 +126,7 @@ class Cfgs(PATH):
         # (Warning: HIDDEN_SIZE should be divided by MULTI_HEAD)
         self.MULTI_HEAD = 8
 
-        # Dropout rate for all layers
+        # Dropout rate for all dropout layers
         # (dropout can prevent overfitting： [Dropout: a simple way to prevent neural networks from overfitting])
         self.DROPOUT_R = 0.1
 
@@ -216,9 +210,6 @@ class Cfgs(PATH):
 
 
         # ------------ Split setup
-        # if not training or train split include val dataset
-        # will not trigger the EVAL_EVERY_EPOCH
-
         self.SPLIT['train'] = self.TRAIN_SPLIT
         if 'val' in self.SPLIT['train'].split('+') or self.RUN_MODE not in ['train']:
             self.EVAL_EVERY_EPOCH = False
@@ -231,12 +222,12 @@ class Cfgs(PATH):
         assert self.BATCH_SIZE % self.GRAD_ACCU_STEPS == 0
         self.SUB_BATCH_SIZE = int(self.BATCH_SIZE / self.GRAD_ACCU_STEPS)
 
-        # Set small eval batch size will reduce gpu memory usage
+        # Use a small eval batch will reduce gpu memory usage
         self.EVAL_BATCH_SIZE = int(self.SUB_BATCH_SIZE / 2)
 
 
         # ------------ Networks setup
-        # MLP size in every MCA layer
+        # FeedForwardNet size in every MCA layer
         self.FF_SIZE = int(self.HIDDEN_SIZE * 4)
 
         # A pipe line hidden size in attention compute

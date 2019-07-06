@@ -76,7 +76,7 @@ class DataSet(Data.Dataset):
         # Answers statistic
         self.ans_to_ix, self.ix_to_ans = ans_stat(self.stat_ans_list, __C.ANS_FREQ)
         self.ans_size = self.ans_to_ix.__len__()
-        print(' ========== answer frequency more than {} size:'.format(__C.ANS_FREQ), self.ans_size)
+        print(' ========== answers occurred more than {} times:'.format(__C.ANS_FREQ), self.ans_size)
         print('Loading finished !!!')
         print('')
 
