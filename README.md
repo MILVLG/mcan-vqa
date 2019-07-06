@@ -30,16 +30,14 @@ You should first install some necessary packages.
 
 	```bash
 	$ pip install -r requirements.txt
-	$ python -m spacy download en
 	$ wget https://github.com/explosion/spacy-models/releases/download/en_vectors_web_lg-2.1.0/en_vectors_web_lg-2.1.0.tar.gz -O en_vectors_web_lg-2.1.0.tar.gz
 	$ pip install en_vectors_web_lg-2.1.0.tar.gz
-	$ rm -f en_vectors_web_lg-2.1.0.tar.gz
 	```
 
 
 #### Setup 
 
- The image features are extracted using the [bottom-up-attention](https://github.com/peteanderson80/bottom-up-attention) strategy, with each image being represented as an dynamic number (from 10 to 100) of 2048-D features. We store the features for each image in a `.npz` file. You can prepare the visual features by yourself or download the extracted features from [here](https://awma1-my.sharepoint.com/:f:/g/personal/yuz_l0_tn/EsfBlbmK1QZFhCOFpr4c5HUBzUV0aH2h1McnPG1jWAxytQ?e=2BZl8O). The download files contains three files: **train2014.tar.gz, val2014.tar.gz, test2015.tar.gz**, corresponding to the train, val, and test images for *VQA-v2*, respectively. You should place them as follows:
+ The image features are extracted using the [bottom-up-attention](https://github.com/peteanderson80/bottom-up-attention) strategy, with each image being represented as an dynamic number (from 10 to 100) of 2048-D features. We store the features for each image in a `.npz` file. You can prepare the visual features by yourself or download the extracted features from [OneDrive](https://awma1-my.sharepoint.com/:f:/g/personal/yuz_l0_tn/EsfBlbmK1QZFhCOFpr4c5HUBzUV0aH2h1McnPG1jWAxytQ?e=2BZl8O) or [BaiduYun](https://pan.baidu.com/s/1C7jIWgM3hFPv-YXJexItgw#list/path=%2F). The download files contains three files: **train2014.tar.gz, val2014.tar.gz, test2015.tar.gz**, corresponding to the train, val, and test images for *VQA-v2*, respectively. You should place them as follows:
 
 ```angular2html
 |-- datasets
@@ -54,7 +52,7 @@ Besides, we use the VQA samples from the [visual genome dataset](http://visualge
 1. Select the QA pairs with the corresponding images appear in the MSCOCO train and *val* splits.
 2. Select the QA pairs with the answer appear in the processed answer list (occurs more than 8 times in whole *VQA-v2* answers).
 
-For convenience, we provide our processed vg questions and annotations files, you can download from [here](https://awma1-my.sharepoint.com/:f:/g/personal/yuz_l0_tn/EmVHVeGdck1IifPczGmXoaMBFiSvsegA6tf_PqxL3HXclw), and place them as follow:
+For convenience, we provide our processed vg questions and annotations files, you can download from [OneDrive](https://awma1-my.sharepoint.com/:f:/g/personal/yuz_l0_tn/EmVHVeGdck1IifPczGmXoaMBFiSvsegA6tf_PqxL3HXclw) or [BaiduYun](https://pan.baidu.com/s/1QCOtSxJGQA01DnhUg7FFtQ#list/path=%2F), and place them as follow:
 
 
 ```angular2html
@@ -208,7 +206,7 @@ _Small_ | 70.7 | 86.91 | **53.42** | 60.75|
 _Large_ | **70.93**| **87.39** | 52.78 | **60.98**|
 
 
-These two models can be download [here](https://awma1-my.sharepoint.com/:f:/g/personal/yuz_l0_tn/EtNU5OG1dNhMq8M1pgeuQZwBgcj2RQCVnzLGDeDfnejPMQ?e=ynYhvk), and you should unzip and put them to the correct folders as follows:
+These two models can be download from [OneDrive](https://awma1-my.sharepoint.com/:f:/g/personal/yuz_l0_tn/EtNU5OG1dNhMq8M1pgeuQZwBgcj2RQCVnzLGDeDfnejPMQ?e=ynYhvk) or [BaiduYun](https://pan.baidu.com/s/1GW_SFErXSIBJ2Ojg2qaRmw#list/path=%2F), and you should unzip and put them to the correct folders as follows:
 
 ```angular2html
 |-- ckpts
