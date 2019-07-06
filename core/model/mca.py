@@ -176,12 +176,10 @@ class MCA_ED(nn.Module):
         self.dec_list = nn.ModuleList([SGA(__C) for _ in range(__C.LAYER)])
 
     def forward(self, x, y, x_mask, y_mask):
-        # Get encoder last hidden vector
+        # Get hidden vector
         for enc in self.enc_list:
             x = enc(x, x_mask)
 
-        # Input encoder last hidden vector
-        # And obtain decoder last hidden vectors
         for dec in self.dec_list:
             y = dec(y, x, y_mask, x_mask)
 

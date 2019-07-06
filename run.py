@@ -44,7 +44,7 @@ def parse_args():
                       type=bool)
 
     parser.add_argument('--BS', dest='BATCH_SIZE',
-                      help='batch size in training',
+                      help='batch size during training',
                       type=int)
 
     parser.add_argument('--MAX_EPOCH', dest='MAX_EPOCH',
@@ -52,7 +52,7 @@ def parse_args():
                       type=int)
 
     parser.add_argument('--GPU', dest='GPU',
-                      help="gpu choose, eg.'0, 1, 2'",
+                      help="gpu select, eg.'0, 1, 2'",
                       type=str)
 
     parser.add_argument('--SEED', dest='SEED',
@@ -64,7 +64,7 @@ def parse_args():
                       type=str)
 
     parser.add_argument('--RESUME', dest='RESUME',
-                      help='use checkpoint to resume training',
+                      help='resume training',
                       type=bool)
 
     parser.add_argument('--CKPT_V', dest='CKPT_VERSION',
@@ -79,16 +79,15 @@ def parse_args():
                       help='load checkpoint path, we '
                            'recommend that you use '
                            'CKPT_VERSION and CKPT_EPOCH '
-                           'instead, it will override'
-                           'CKPT_VERSION and CKPT_EPOCH',
+                           'instead',
                       type=str)
 
     parser.add_argument('--ACCU', dest='GRAD_ACCU_STEPS',
-                      help='split batch to reduce gpu memory usage',
+                      help='reduce gpu memory usage',
                       type=int)
 
     parser.add_argument('--NW', dest='NUM_WORKERS',
-                      help='multithreaded loading to accelerate IO',
+                      help='multithreaded loading',
                       type=int)
 
     parser.add_argument('--PINM', dest='PIN_MEM',

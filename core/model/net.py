@@ -85,18 +85,16 @@ class Net(nn.Module):
 
         self.backbone = MCA_ED(__C)
 
-        # Flatten to vector
         self.attflat_img = AttFlat(__C)
         self.attflat_lang = AttFlat(__C)
 
-        # Classification layers
         self.proj_norm = LayerNorm(__C.FLAT_OUT_SIZE)
         self.proj = nn.Linear(__C.FLAT_OUT_SIZE, answer_size)
 
 
     def forward(self, img_feat, ques_ix):
 
-        # Make mask for attention learning
+        # Make mask
         lang_feat_mask = self.make_mask(ques_ix.unsqueeze(2))
         img_feat_mask = self.make_mask(img_feat)
 
@@ -115,7 +113,6 @@ class Net(nn.Module):
             img_feat_mask
         )
 
-        # Flatten to vector
         lang_feat = self.attflat_lang(
             lang_feat,
             lang_feat_mask
@@ -126,7 +123,6 @@ class Net(nn.Module):
             img_feat_mask
         )
 
-        # Classification layers
         proj_feat = lang_feat + img_feat
         proj_feat = self.proj_norm(proj_feat)
         proj_feat = torch.sigmoid(self.proj(proj_feat))
@@ -134,7 +130,7 @@ class Net(nn.Module):
         return proj_feat
 
 
-    # Masking the sequence
+    # Masking
     def make_mask(self, feature):
         return (torch.sum(
             torch.abs(feature),
