@@ -375,7 +375,7 @@ class Execution:
         ans_ix_list = np.array(ans_ix_list).reshape(-1)
 
         result = [{
-            'answer': dataset.ix_to_ans[ans_ix_list[qix]],
+            'answer': dataset.ix_to_ans[str(ans_ix_list[qix])],  # ix_to_ans(load with json) keys are type of string
             'question_id': int(qid_list[qix])
         }for qix in range(qid_list.__len__())]
 

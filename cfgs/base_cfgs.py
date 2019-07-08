@@ -80,7 +80,7 @@ class Cfgs(PATH):
         self.MAX_TOKEN = 14
 
         # Filter the answer by occurrence
-        self.ANS_FREQ = 8
+        # self.ANS_FREQ = 8
 
         # Max length of extracted faster-rcnn 2048D features
         # (bottom-up and Top-down: https://github.com/peteanderson80/bottom-up-attention)
