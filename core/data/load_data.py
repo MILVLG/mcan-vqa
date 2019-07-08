@@ -35,9 +35,9 @@ class DataSet(Data.Dataset):
             json.load(open(__C.QUESTION_PATH['vg'], 'r'))['questions']
 
         # Loading answer word list
-        self.stat_ans_list = \
-            json.load(open(__C.ANSWER_PATH['train'], 'r'))['annotations'] + \
-            json.load(open(__C.ANSWER_PATH['val'], 'r'))['annotations']
+        # self.stat_ans_list = \
+        #     json.load(open(__C.ANSWER_PATH['train'], 'r'))['annotations'] + \
+        #     json.load(open(__C.ANSWER_PATH['val'], 'r'))['annotations']
 
         # Loading question and answer list
         self.ques_list = []
@@ -74,9 +74,18 @@ class DataSet(Data.Dataset):
         print(' ========== question token size:', self.token_size)
 
         # Answers statistic
-        self.ans_to_ix, self.ix_to_ans = ans_stat(self.stat_ans_list, __C.ANS_FREQ)
+        # Make answer dict during training does not guarantee
+        # the same order of {ans_to_ix}, so we published our
+        # answer dict to ensure that our pre-trained model
+        # can be adapted on each machine.
+
+        # Thanks to Licheng Yu (https://github.com/lichengunc)
+        # for finding this bug and providing the solutions.
+
+        # self.ans_to_ix, self.ix_to_ans = ans_stat(self.stat_ans_list, __C.ANS_FREQ)
+        self.ans_to_ix, self.ix_to_ans = ans_stat('core/data/answer_dict.json')
         self.ans_size = self.ans_to_ix.__len__()
-        print(' ========== answers occurred more than {} times:'.format(__C.ANS_FREQ), self.ans_size)
+        print(' ========== answers occurred more than {} times:'.format(8), self.ans_size)
         print('Loading finished !!!')
         print('')
 

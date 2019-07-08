@@ -11,10 +11,10 @@ class PATH:
 
         # vqav2 dataset root path
         self.DATASET_PATH = './datasets/vqa/'
-        
+
         # bottom up features root path
         self.FEATURE_PATH = './datasets/coco_extract/'
-        
+
         self.init_path()
 
 
