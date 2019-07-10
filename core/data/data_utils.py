@@ -27,6 +27,19 @@ def img_feat_path_load(path_list):
     return iid_to_path
 
 
+def img_feat_load(path_list):
+    iid_to_feat = {}
+
+    for ix, path in enumerate(path_list):
+        iid = str(int(path.split('/')[-1].split('_')[-1].split('.')[0]))
+        img_feat = np.load(path)
+        img_feat_x = img_feat['x'].transpose((1, 0))
+        iid_to_feat[iid] = img_feat_x
+        print('\rPre-Loading: [{} | {}] '.format(ix, path_list.__len__()), end='          ')
+
+    return iid_to_feat
+
+
 def ques_load(ques_list):
     qid_to_ques = {}
 

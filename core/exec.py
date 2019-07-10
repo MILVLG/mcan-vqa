@@ -11,7 +11,7 @@ from core.data.data_utils import shuffle_list
 from utils.vqa import VQA
 from utils.vqaEval import VQAEval
 
-import os, json, torch, datetime, pickle, copy, shutil
+import os, json, torch, datetime, pickle, copy, shutil, time
 import numpy as np
 import torch.nn as nn
 import torch.utils.data as Data
@@ -143,6 +143,7 @@ class Execution:
             if self.__C.SHUFFLE_MODE == 'external':
                 shuffle_list(dataset.ans_list)
 
+            time_start = time.time()
             # Iteration
             for step, (
                     img_feat_iter,
@@ -214,7 +215,10 @@ class Execution:
 
                 optim.step()
 
-            print('')
+            time_end = time.time()
+            print('Finished in {}s'.format(int(time_end-time_start)))
+
+            # print('')
             epoch_finish = epoch + 1
 
             # Save checkpoint

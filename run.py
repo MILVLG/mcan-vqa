@@ -51,6 +51,11 @@ def parse_args():
                       help='max training epoch',
                       type=int)
 
+    parser.add_argument('--PRELOAD', dest='PRELOAD',
+                      help='pre-load the features into memory'
+                           'to increase the I/O speed',
+                      type=bool)
+
     parser.add_argument('--GPU', dest='GPU',
                       help="gpu select, eg.'0, 1, 2'",
                       type=str)

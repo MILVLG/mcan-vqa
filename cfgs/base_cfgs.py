@@ -28,7 +28,8 @@ class Cfgs(PATH):
         # -------------------------
 
         # Define a specific name to start new training
-        self.VERSION = 'Anonymous_' + str(self.SEED)
+        # self.VERSION = 'Anonymous_' + str(self.SEED)
+        self.VERSION = str(self.SEED)
 
         # Resume training
         self.RESUME = False
@@ -56,6 +57,9 @@ class Cfgs(PATH):
 
         # Set True to save the prediction vector (Ensemble)
         self.TEST_SAVE_PRED = False
+
+        # Pre-load the features into memory to increase the I/O speed
+        self.PRELOAD = False
 
         # Define the 'train' 'val' 'test' data split
         # (EVAL_EVERY_EPOCH triggered when set {'train': 'train'})
