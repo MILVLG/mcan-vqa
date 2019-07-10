@@ -62,7 +62,7 @@ class PATH:
 
 
     def check_path(self):
-        print('Check dataset ........')
+        print('Checking dataset ...')
 
         for mode in self.IMG_FEAT_PATH:
             if not os.path.exists(self.IMG_FEAT_PATH[mode]):
@@ -79,6 +79,6 @@ class PATH:
                 print(self.ANSWER_PATH[mode] + 'NOT EXIST')
                 exit(-1)
 
-        print('Check successfully ........')
+        print('Finished')
         print('')
 
