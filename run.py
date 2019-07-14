@@ -16,14 +16,17 @@ def parse_args():
     parser = argparse.ArgumentParser(description='MCAN Args')
 
     parser.add_argument('--RUN', dest='RUN_MODE',
+                      choices=['train', 'val', 'test'],
                       help='{train, val, test}',
                       type=str, required=True)
 
     parser.add_argument('--MODEL', dest='MODEL',
+                      choices=['small', 'large'],
                       help='{small, large}',
                       default='small', type=str)
 
     parser.add_argument('--SPLIT', dest='TRAIN_SPLIT',
+                      choices=['train', 'train+val', 'train+val+vg'],
                       help="set training split, "
                            "eg.'train', 'train+val+vg'"
                            "set 'train' can trigger the "

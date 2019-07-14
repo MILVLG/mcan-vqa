@@ -66,7 +66,7 @@ class DataSet(Data.Dataset):
         else:
             self.data_size = self.ques_list.__len__()
 
-        print(' ========== run data size:', self.data_size)
+        print('== Dataset size:', self.data_size)
 
 
         # ------------------------
@@ -75,11 +75,11 @@ class DataSet(Data.Dataset):
 
         # {image id} -> {image feature absolutely path}
         if self.__C.PRELOAD:
-            print('Pre-Loading features ...')
+            print('==== Pre-Loading features ...')
             time_start = time.time()
             self.iid_to_img_feat = img_feat_load(self.img_feat_path_list)
             time_end = time.time()
-            print('Finished in {}s'.format(int(time_end-time_start)))
+            print('==== Finished in {}s'.format(int(time_end-time_start)))
         else:
             self.iid_to_img_feat_path = img_feat_path_load(self.img_feat_path_list)
 
@@ -89,7 +89,7 @@ class DataSet(Data.Dataset):
         # Tokenize
         self.token_to_ix, self.pretrained_emb = tokenize(self.stat_ques_list, __C.USE_GLOVE)
         self.token_size = self.token_to_ix.__len__()
-        print(' ========== question token size:', self.token_size)
+        print('== Question token vocab size:', self.token_size)
 
         # Answers statistic
         # Make answer dict during training does not guarantee
@@ -103,8 +103,8 @@ class DataSet(Data.Dataset):
         # self.ans_to_ix, self.ix_to_ans = ans_stat(self.stat_ans_list, __C.ANS_FREQ)
         self.ans_to_ix, self.ix_to_ans = ans_stat('core/data/answer_dict.json')
         self.ans_size = self.ans_to_ix.__len__()
-        print(' ========== answers occurred more than {} times:'.format(8), self.ans_size)
-        print('Loading finished !!!')
+        print('== Answer vocab size (occurr more than {} times):'.format(8), self.ans_size)
+        print('Finished!')
         print('')
 
 
