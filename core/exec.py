@@ -21,7 +21,7 @@ class Execution:
     def __init__(self, __C):
         self.__C = __C
 
-        print('Loading dataset ........')
+        print('Loading training set ........')
         self.dataset = DataSet(__C)
 
         self.dataset_eval = None
@@ -29,7 +29,7 @@ class Execution:
             __C_eval = copy.deepcopy(__C)
             setattr(__C_eval, 'RUN_MODE', 'val')
 
-            print('Loading eval every epoch dataset ........')
+            print('Loading validation set for per-epoch evaluation ........')
             self.dataset_eval = DataSet(__C_eval)
 
 
@@ -74,9 +74,9 @@ class Execution:
                        '/epoch' + str(self.__C.CKPT_EPOCH) + '.pkl'
 
             # Load the network parameters
-            print('Loading the {}'.format(path))
+            print('Loading ckpt {}'.format(path))
             ckpt = torch.load(path)
-            print('Finish loading ckpt !!!')
+            print('Finish!')
             net.load_state_dict(ckpt['state_dict'])
 
             # Load the optimizer paramters
@@ -296,9 +296,9 @@ class Execution:
         val_ckpt_flag = False
         if state_dict is None:
             val_ckpt_flag = True
-            print('Loading the {}'.format(path))
+            print('Loading ckpt {}'.format(path))
             state_dict = torch.load(path)['state_dict']
-            print('Finish loading ckpt !!!')
+            print('Finish!')
 
         # Store the prediction list
         qid_list = [ques['question_id'] for ques in dataset.ques_list]
@@ -519,10 +519,10 @@ class Execution:
 
 
     def empty_log(self, version):
-        print('Empty the log file ........')
+        print('Initializing log file ........')
         if (os.path.exists(self.__C.LOG_PATH + 'log_run_' + version + '.txt')):
             os.remove(self.__C.LOG_PATH + 'log_run_' + version + '.txt')
-        print('Finished !!!')
+        print('Finished!')
         print('')
 
 
