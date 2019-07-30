@@ -1,5 +1,6 @@
 # Deep Modular Co-Attention Networks (MCAN)
 
+**This project is no-longer updated! The Pytorch implementation of MCAN with pre-trained models, along with several state-of-the-art VQA/GQA/CLEVR models are maintained in our [OpenVQA](https://github.com/MILVLG/openvqa) project, which well be updated regularly!**
 
 This repository corresponds to the **PyTorch** implementation of the MCAN for VQA, which won the champion in [VQA Challgen 2019](https://visualqa.org/roe.html). With an ensemble of 27 models, we achieved an overall accuracy **75.23%** and **75.26%** on *test-std* and *test-challenge* splits, respectively. See our  [slides](https://drive.google.com/open?id=1geJTEVMMGs9Y3S2_pZxNzgPMccfYpM_r) for details.
 
