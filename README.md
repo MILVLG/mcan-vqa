@@ -1,13 +1,23 @@
 # Deep Modular Co-Attention Networks (MCAN)
 
-**This project is no-longer updated! The Pytorch implementation of MCAN with pre-trained models, along with several state-of-the-art VQA/GQA/CLEVR models are maintained in our [OpenVQA](https://github.com/MILVLG/openvqa) project, which well be updated regularly!**
-
 This repository corresponds to the **PyTorch** implementation of the MCAN for VQA, which won the champion in [VQA Challgen 2019](https://visualqa.org/roe.html). With an ensemble of 27 models, we achieved an overall accuracy **75.23%** and **75.26%** on *test-std* and *test-challenge* splits, respectively. See our  [slides](https://drive.google.com/open?id=1geJTEVMMGs9Y3S2_pZxNzgPMccfYpM_r) for details.
 
 By using the commonly used bottom-up-attention visual features, a single MCAN model delivers **70.70%** (small model) and **70.93%** (large model) overall accuracy on the *test-dev* split of *VQA-v2* dataset respectively, which significantly outperform existing state-of-the-arts. Please check our [paper](http://openaccess.thecvf.com/content_CVPR_2019/html/Yu_Deep_Modular_Co-Attention_Networks_for_Visual_Question_Answering_CVPR_2019_paper.html) for details.
 
 ![Overview of MCAN](misc/mcan_overall.png)
 
+## Updates
+
+July 10, 2019
+
+- The Pytorch implementation of MCAN with pre-trained models, along with several state-of-the-art VQA/GQA/CLEVR models are maintained in our [OpenVQA](https://github.com/MILVLG/openvqa) project.
+
+June 13, 2019
+- Project initialization of pure PyTorch implementation of MCAN model with deep encoder-decoder strategy in our CVPR19 paper. 
+- Self-contained documentation from scartch.
+- Model zoo consists of pre-trained MCAN-small and MCAN-large models on the VQA-v2 dataset.
+- Multi-GPUs training and gradient accumulation.
+- 
 
 ## Table of Contents
 0. [Prerequisites](#Prerequisites)
