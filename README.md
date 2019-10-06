@@ -10,11 +10,11 @@ By using the commonly used bottom-up-attention visual features, a single MCAN mo
 
 July 10, 2019
 
-- The Pytorch implementation of MCAN with pre-trained models, along with several state-of-the-art VQA/GQA/CLEVR models are maintained in our [OpenVQA](https://github.com/MILVLG/openvqa) project.
+- **Pytorch implementation of MCAN along with several state-of-the-art models on VQA/GQA/CLEVR are maintained in our another [OpenVQA](https://github.com/MILVLG/openvqa) project.**
 
 June 13, 2019
-- Project initialization of pure PyTorch implementation of MCAN model with deep encoder-decoder strategy in our CVPR19 paper. 
-- Self-contained documentation from scartch.
+- Pure PyTorch implementation of MCAN model with deep encoder-decoder strategy. 
+- Self-contained documentation from scratch .
 - Model zoo consists of pre-trained MCAN-small and MCAN-large models on the VQA-v2 dataset.
 - Multi-GPUs training and gradient accumulation.
 
