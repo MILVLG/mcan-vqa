@@ -17,7 +17,6 @@ June 13, 2019
 - Self-contained documentation from scartch.
 - Model zoo consists of pre-trained MCAN-small and MCAN-large models on the VQA-v2 dataset.
 - Multi-GPUs training and gradient accumulation.
-- 
 
 ## Table of Contents
 0. [Prerequisites](#Prerequisites)
