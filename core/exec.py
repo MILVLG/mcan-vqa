@@ -177,7 +177,10 @@ class Execution:
                     )
 
                     loss = loss_fn(pred, sub_ans_iter)
-                    loss /= self.__C.GRAD_ACCU_STEPS
+                    # only mean-reduction needs be divided by grad_accu_steps
+                    # removing this line wouldn't change our results because the speciality of Adam optimizer,
+                    # but would be necessary if you use SGD optimizer.
+                    # loss /= self.__C.GRAD_ACCU_STEPS
                     loss.backward()
                     loss_sum += loss.cpu().data.numpy() * self.__C.GRAD_ACCU_STEPS
 
